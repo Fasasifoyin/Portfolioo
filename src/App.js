@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useRef } from "react";
+import "./App.css";
+import Navbar from "./component/Navbar";
+import Home from "./component/Home";
+import Handles from "./component/Handles";
+import About from "./component/About";
+import Project from "./component/Projects";
+import Contact from "./component/Contact";
+import Footer from "./component/Footer";
+import { useInView } from "framer-motion";
 
 function App() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { amount: 0.5 });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App position-relative">
+      <Navbar />
+      <Home />
+      {!isInView && <Handles />}
+      <About />
+      <Project />
+      <Contact />
+      <div ref={ref}>
+        <Footer />
+      </div>
     </div>
   );
 }
